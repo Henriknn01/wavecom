@@ -45,7 +45,7 @@ async function sendMessage() {
 <div class="messages">
     {#each messages as message (message.id)}
         <div class="msg">
-            <img class="avatar" src={`https://avatars.dicebear.com/api/identicon/${message.expand?.user?.username}.svg`} alt="avatar" width="40px"/>
+            <img class="avatar" src={`https://api.dicebear.com/7.x/identicon/svg?seed=${message.expand?.user?.username}`} alt="avatar" width="40px"/>
             <div>
                 <small>
                     Sent by @{message.expand?.user?.username}
