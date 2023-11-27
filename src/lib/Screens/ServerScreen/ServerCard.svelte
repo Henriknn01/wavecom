@@ -1,9 +1,11 @@
 <!-- HTML code-->
 <script>
     import NavBar from "./NavBar.svelte";
-    let serverName = "server";
+    let serverName = "Server Name ";
     let description = "description";
 </script>
+
+<h1>Server Screen</h1>
 
 <div class="serverCard">
     <svg
@@ -25,6 +27,8 @@
         <p>{serverName}</p>
         {description}
     </div>
+
+    <!--problem with displaying arrow icon -->
     <div class="arrowIcon">
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +60,7 @@
     .serverText {
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
     }
 
     .arrowIcon {
