@@ -1,9 +1,20 @@
-<script>
+<script lang="ts">
     import ServerCard from "./ServerCard.svelte";
     import NavBar from "../../NavBar.svelte";
     import { onMount } from "svelte";
     import { pb } from "$lib/pocketbase";
-    import { ArrowLongRight } from "svelte-heros-v2";
+    import { Plus } from "svelte-heros-v2";
+    import { preview } from "vite";
+
+    /*gets a list of the servers from the database*/
+    let servers: any = [];
+
+    onMount(async () => {
+        const resultList = await pb.collection("servers").getList(1, 50, {
+            sort: "created",
+        });
+        servers = resultList.items;
+    });
 </script>
 
 <!-- HTML code-->
@@ -17,28 +28,61 @@
 </div>
 -->
 
-<div class="NavigationTop">
-    <h1>Servers</h1>
-</div>
+<div class="Box">
+    <div class="NavigationTop">
+        <span class="headline">Servers</span>
+        <!--<img class ="server-img" src={ServerCard.serverImg} alt="serverImage">
+            -->
 
-<!--Displays a list of servers-->
-<!--Uses ServerCard.svelte as a component to display servername and brief description-->
-<div class="ServerList">
-    <ol>
-        <li><ServerCard></ServerCard></li>
-        <li><ServerCard></ServerCard></li>
-        <li><ServerCard /></li>
-    </ol>
-</div>
+        <button type="button" class="btn" title="AddNewServer">
+            <Plus></Plus>
+        </button>
+    </div>
 
-<p>this is the bottom of the page</p>
+    <!--Displays a list of servers-->
+    <!--Uses ServerCard.svelte as a component to display servername and brief description-->
+    <div class="ServerList">
+        <ol>
+            <li><ServerCard></ServerCard></li>
+            <li><ServerCard></ServerCard></li>
+            <li><ServerCard /></li>
+            <li><ServerCard /></li>
+            <li><ServerCard /></li>
+            <li><ServerCard /></li>
+            <li><ServerCard /></li>
+            <li><ServerCard /></li>
+        </ol>
+    </div>
+</div>
 
 <!--sets the navigation bar from NavBar.svelte as an overlay-->
 <NavBar />
 
 <style>
-    p {
-        position: bottom;
+    .headline {
+        float: left;
+        padding: 10px;
+    }
+
+    .btn {
+        float: right;
+        padding: 10px;
+    }
+
+    .Box {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .NavigationTop {
+        background-color: #333;
+        top: 0;
+        color: #fff;
+        padding: 1px;
+        text-align: center;
+        width: 100%;
     }
 
     .ServerList {
@@ -48,7 +92,7 @@
 
     li {
         /* Prevents item in the list from overlapping*/
-        padding-bottom: 110px;
+        padding-bottom: 10px;
         /* Prevents the items in the list to display their number within the list*/
         list-style-type: none;
     }
