@@ -6,9 +6,15 @@ import {goto} from "$app/navigation";
 let username: string;
 let password: string;
 
+let err:any = null;
+
 // login function
 async function login() {
-    await pb.collection('users').authWithPassword(username, password);
+    try {
+        await pb.collection('users').authWithPassword(username, password);
+    } catch (e) {
+        err = e.data;
+    }
 }
 
 // sign out function
@@ -30,6 +36,16 @@ function goSignUp() {
         <button on:click={signOut}>Sign Out</button>
     </p>
 {:else}
+    {#if err != null}
+    <div class="bg-red-500 text-white rounded-lg p-2 space-y-2">
+        <p>{err.message}</p>
+        <ul class="list-disc ml-6">
+        {#each Object.entries(err.data) as [key, value]}
+            <li><b>{key.toUpperCase()}</b> <small> - {Object.values(Object.entries(value)[1])[1]}</small></li>
+        {/each}
+        </ul>
+    </div>
+    {/if}
     <form on:submit|preventDefault class="space-y-2">
         <div class="flex flex-col w-full space-y-4">
             <label for="username">Username</label>
