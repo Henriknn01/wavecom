@@ -7,6 +7,7 @@ let username: string;
 let email: string;
 let password: string;
 let passwordConfirm: string;
+let err:any = null;
 
 async function login() {
     await pb.collection('users').authWithPassword(username, password);
@@ -23,8 +24,8 @@ async function signUp() {
         };
         const createdUser = await pb.collection('users').create(data);
         await login();
-    } catch (err) {
-        console.error(err);
+    } catch (e) {
+        err = e.data;
     }
 }
 
@@ -33,7 +34,7 @@ function signOut() {
 }
 
 function cancel() {
-    goto('/');
+    goto('/auth/login');
 }
 
 </script>
@@ -44,17 +45,28 @@ function cancel() {
         <button on:click={signOut}>Sign Out</button>
     </p>
 {:else}
+    {#if err != null}
+    <div class="bg-red-500 text-white rounded-lg p-2 space-y-2">
+        <p>{err.message}</p>
+        <ul class="list-disc ml-6">
+        {#each Object.entries(err.data) as [key, value]}
+            <li><b>{key.toUpperCase()}</b> <small> - {Object.values(Object.entries(value)[1])[1]}</small></li>
+        {/each}
+        </ul>
+    </div>
+    {/if}
+    <p><i><small class="text-red-600">*</small> Required fields</i></p>
     <form on:submit|preventDefault class="space-y-2">
         <div class="flex flex-col w-full space-y-4">
             <label for="name">Name</label>
             <input id="name" class="p-4" placeholder="Name" type="text" bind:value={name}>
             <label for="username">Username</label>
             <input id="username" class="p-4" placeholder="Username" type="text" bind:value={username}>
-            <label for="email">Email</label>
+            <label for="email">Email <small class="text-red-600">*</small></label>
             <input id="email" class="p-4" placeholder="Email" type="email" bind:value={email}>
-            <label for="password">Password</label>
+            <label for="password">Password <small class="text-red-600">*</small></label>
             <input id="password" class="p-4" placeholder="Password" type="password" bind:value={password}>
-            <label for="passwordConfirm">Confirm Password</label>
+            <label for="passwordConfirm">Confirm Password <small class="text-red-600">*</small></label>
             <input id="passwordConfirm" class="p-4" placeholder="Confirm Password" type="password" bind:value={passwordConfirm}>
         </div>
         <div class="flex w-full space-x-4 font-semibold">
