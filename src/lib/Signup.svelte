@@ -34,7 +34,7 @@ function signOut() {
 }
 
 function cancel() {
-    goto('/');
+    goto('/auth/login');
 }
 
 </script>
