@@ -1,11 +1,9 @@
 <!-- HTML code-->
 <script>
-    import NavBar from "./NavBar.svelte";
+    import { ArrowLongRight } from "svelte-heros-v2";
     let serverName = "Server Name ";
     let description = "description";
 </script>
-
-<h1>Server Screen</h1>
 
 <div class="serverCard">
     <svg
@@ -30,22 +28,8 @@
 
     <!--problem with displaying arrow icon -->
     <div class="arrowIcon">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-        >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-        </svg>
+        <ArrowLongRight></ArrowLongRight>
     </div>
-    <NavBar />
 </div>
 
 <style>
@@ -55,6 +39,7 @@
         padding: 10px;
         justify-content: space-around;
         display: flex;
+        overflow: auto;
     }
 
     .serverText {
@@ -66,6 +51,6 @@
     .arrowIcon {
         display: flex;
         flex-direction: row;
-        background-color: orange;
+        background-color: blue;
     }
 </style>
