@@ -13,5 +13,4 @@ import Servers from "$lib/Servers.svelte";
         <img class="avatar border border-pink-600 rounded-full" src={`https://api.dicebear.com/7.x/notionists-neutral/svg?seed=${$currentUser?.username}`} alt="avatar" width="30px"/>
     </a>
 </div>
-<p>Server Overview</p>
 <Servers />
