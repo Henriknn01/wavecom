@@ -52,7 +52,7 @@
 </div>
 <div class="flex border-b border-gray-300 pb-2">
     <h1 class="text-xl flex-1">Member list</h1>
-    <a href="channels/create">
+    <a href="members/add">
         <Plus></Plus>
     </a>
 </div>
