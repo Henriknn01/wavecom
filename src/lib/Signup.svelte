@@ -11,6 +11,7 @@ let err:any = null;
 
 async function login() {
     await pb.collection('users').authWithPassword(username, password);
+    await goto('/');
 }
 
 async function signUp() {
@@ -23,6 +24,7 @@ async function signUp() {
             "name": name
         };
         const createdUser = await pb.collection('users').create(data);
+        await pb.collection('users').requestVerification(email);
         await login();
     } catch (e) {
         err = e.data;

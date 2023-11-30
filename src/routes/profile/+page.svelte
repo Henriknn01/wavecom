@@ -6,7 +6,7 @@ import { ArrowLongLeft } from 'svelte-heros-v2';
 // signout function - clears the authStore then redirects user to the main page.
 function signOut() {
     pb.authStore.clear();
-    goto("/");
+    goto("/auth/login");
 }
 
 </script>
