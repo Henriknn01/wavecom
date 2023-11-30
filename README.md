@@ -1,7 +1,7 @@
 # Wavecom
-# Building and Running Capacitor Applications for iOS and Android
+# Building and Running Wavecom for iOS and Android
 
-This README provides instructions on building and running Capacitor applications for iOS and Android.
+This README provides instructions on building and running the Wavecom application for iOS and Android.
 
 ## Prerequisites
 
