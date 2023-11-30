@@ -2,7 +2,7 @@
 // Import
 import { onMount, onDestroy } from "svelte";
 import { currentUser, pb } from "$lib/pocketbase";
-import { PaperAirplane, Plus } from 'svelte-heros-v2';
+import { PaperAirplane, Trash } from 'svelte-heros-v2';
 
 // Create variables
 export let channel: string;
@@ -66,6 +66,10 @@ async function sendMessage() {
     console.log(messages)
 }
 
+async function deleteMessage(messageId:string) {
+    await pb.collection('messages').delete(messageId);
+}
+
 </script>
 <!-- Only render if user is authenticated. -->
 {#if $currentUser}
@@ -74,13 +78,14 @@ async function sendMessage() {
         <div class="msg flex space-x-4">
             <!-- Render different chat bubble if message is sendt by other user -->
             {#if message.expand?.user?.id == $currentUser.id}
+            <button class="text-red-500 text-xs" on:click={() => deleteMessage(message.id)}><Trash></Trash></button>
             <div class="flex-1 bg-blue-300 p-1.5 rounded-l-lg rounded-tr-lg w-full text-right">
                 <small class="text-xs text-gray-800 font-light">
                      @{message.expand?.user?.username}
                 </small>
                 <p class="msg-text">{message.text}</p>
                 {#if message.hasImage == true}
-                    <img src={`http://192.168.1.116:8090/api/files/messages/${message.id}/${message.image}`} alt="userImage" width="300" height="300" style="float: right"/>
+                    <img src={`http://192.168.1.116:8090/api/files/messages/${message.id}/${message.image}`} class="rounded-lg w-auto max-h-80" alt="userImage" style="float: right"/>
                 {/if}
             </div>
             <img class="avatar flex-0 rounded-full h-8 w-8 border border-pink-600 my-4" src={`https://api.dicebear.com/7.x/notionists-neutral/svg?seed=${message.expand?.user?.username}`} alt="avatar" width="30px" height="30"/>
@@ -92,7 +97,7 @@ async function sendMessage() {
                 </small>
                 <p class="msg-text">{message.text}</p>
                 {#if message.hasImage == true}
-                <img src={`http://192.168.1.116:8090/api/files/messages/${message.id}/${message.image}`} alt="userImage" width="300" height="300"/>
+                <img src={`http://192.168.1.116:8090/api/files/messages/${message.id}/${message.image}`} class="rounded-lg w-auto max-h-80" alt="userImage"/>
                 {/if}
             </div>
             {/if}
