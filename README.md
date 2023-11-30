@@ -12,7 +12,7 @@ Ensure you have the following software installed on your system:
 - Xcode (for iOS)
 - Android Studio (for Android)
 
-## Capsule Setup
+## Capacitor Setup
 
 If not already done, install Capacitor globally with the following command:
 
