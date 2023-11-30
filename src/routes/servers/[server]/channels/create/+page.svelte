@@ -3,22 +3,24 @@ import { ArrowLongLeft, Plus } from 'svelte-heros-v2';
 import { currentUser, pb } from "$lib/pocketbase";
 import { goto } from '$app/navigation';
 
+export let data;
 let inputField:any;
 let newChannel:string = "";
 
 async function createChannel() {
-    const data = {
+    const formData = {
         name: newChannel,
+        server: data.server,
     };
-    const record = await pb.collection('channels').create(data);
+    const record = await pb.collection('channels').create(formData);
     inputField = '';
-    await goto('/channels');
+    await goto('/servers/'+data.server+'/channels');
 }
 
 </script>
 
 <div class="text-center border-b border-gray-300 pb-2 flex">
-    <a href="/channels/">
+    <a href="/servers/{data.server}/channels">
         <ArrowLongLeft></ArrowLongLeft>
     </a>
     <div class="text-center flex-1 pr-4">
