@@ -66,7 +66,7 @@ Android Studio, run the app by clicking the 'Run' button or pressing Shift + F10
 
 More Information
 
-For more detailed information, please refer to the Capacitor [https://capacitorjs.com/docs](official documentation).
+For more detailed information, please refer to the Capacitor official documentation[`https://capacitorjs.com/docs`](https://capacitorjs.com/docs).
 
 ***
 
