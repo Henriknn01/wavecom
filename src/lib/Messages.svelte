@@ -3,7 +3,6 @@
 import { onMount, onDestroy } from "svelte";
 import { currentUser, pb } from "$lib/pocketbase";
 import { PaperAirplane, Plus } from 'svelte-heros-v2';
-import fs from "fs";
 
 // Create variables
 export let channel: string;
