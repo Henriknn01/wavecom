@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Plus, ArrowLongLeft } from 'svelte-heros-v2';
 import { currentUser } from "$lib/pocketbase";
+import Servers from "$lib/Servers.svelte";
 </script>
 
 <div class="flex space-x-4 space-y-2 border-b border-gray-300 pb-2">
@@ -13,4 +14,4 @@ import { currentUser } from "$lib/pocketbase";
     </a>
 </div>
 <p>Server Overview</p>
-
+<Servers />

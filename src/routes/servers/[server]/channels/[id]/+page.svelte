@@ -15,7 +15,7 @@ onMount(async () => {
 </script>
 
 <div class="text-center border-b border-gray-300 pb-2 flex">
-    <a href="/channels/">
+    <a href="/servers/{channel.server}/channels">
         <ArrowLongLeft></ArrowLongLeft>
     </a>
     <div class="text-center flex-1">

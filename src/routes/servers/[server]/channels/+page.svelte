@@ -1,14 +1,24 @@
-<script>
+<script lang="ts">
 import { Plus, ArrowLongLeft } from 'svelte-heros-v2';
-import { currentUser } from "$lib/pocketbase";
 import Channels from "$lib/Channels.svelte";
+import { onMount } from "svelte";
+import { currentUser, pb } from "$lib/pocketbase";
+
+export let data;
+
+let server: any = [];
+
+onMount(async () => {
+    const resultList = await pb.collection('servers').getOne(data.id, {});
+    server = resultList;
+});
 </script>
 
 <div class="flex space-x-4 space-y-2 border-b border-gray-300 pb-2">
     <a href="/" class="my-auto">
         <ArrowLongLeft></ArrowLongLeft>
     </a>
-    <h1 class="text-4xl font-bold flex-1">Wavecom</h1>
+    <h1 class="text-2xl font-bold flex-1">{server.name}</h1>
     <a href="channels/create" class="my-auto">
         <Plus></Plus>
     </a>
@@ -17,4 +27,4 @@ import Channels from "$lib/Channels.svelte";
     </a>
 </div>
 
-<Channels />
+<Channels server={data.id} />
