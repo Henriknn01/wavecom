@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Plus, ArrowLongLeft, Users } from 'svelte-heros-v2';
+import { Plus, ArrowLongLeft, Users, PencilSquare } from 'svelte-heros-v2';
 import Channels from "$lib/Channels.svelte";
 import { onMount } from "svelte";
 import { currentUser, pb } from "$lib/pocketbase";
@@ -9,7 +9,7 @@ export let data;
 let server: any = [];
 
 onMount(async () => {
-    const resultList = await pb.collection('servers').getOne(data.id, {});
+    const resultList = await pb.collection('servers').getOne(data.id, {expand: 'owner'});
     server = resultList;
 });
 </script>
@@ -19,6 +19,11 @@ onMount(async () => {
         <ArrowLongLeft></ArrowLongLeft>
     </a>
     <h1 class="text-2xl font-bold flex-1">{server.name}</h1>
+    {#if server.expand?.owner?.id == $currentUser.id}
+        <a href="edit/" class="my-auto">
+        <PencilSquare></PencilSquare>
+        </a>
+    {/if}
     <a href="channels/create" class="my-auto">
         <Plus></Plus>
     </a>
