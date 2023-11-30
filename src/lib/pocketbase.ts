@@ -12,9 +12,8 @@ export function createInstance() {
     return new PocketBase('https://api.norheimweb.com/');
 }
 
-// lgos
 pb.authStore.onChange((auth) => {
-    console.log('authStore changed', auth);
-    currentUser.set(pb.authStore.model);
-    document.cookie = pb.authStore.exportToCookie({ httpOnly: false });
+    // console.log('authStore changed', auth);
+    currentUser.set(pb.authStore.model); // sets current user on authStore change
+    document.cookie = pb.authStore.exportToCookie({ httpOnly: false }); // sets cookie on authStore change
 })

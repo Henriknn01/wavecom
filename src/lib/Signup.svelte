@@ -1,7 +1,34 @@
+<!--
+This component is responsible for user signup and authentication in the application.
+
+It begins with importing necessary modules. The 'currentUser' and 'pb' (pocketbase instance) from the "$lib/pocketbase", and 'goto' from
+"$app/navigation" modules.
+
+Following the imports, different variables for user information including 'name', 'username', 'email', 'password', 'passwordConfirm'
+are defined. Further, 'err' is defined to store errors.
+
+Three primary functions are featured in this script/component:
+
+1. 'login': This function is designed to log the user in using the 'authWithPassword' method of the 'users' collection from the
+   pocketbase instance ('pb'). After successful login, it redirects the user to the '/servers' page using the 'goto' function.
+
+2. 'signUp': The function aims to sign up a new user. It starts by defining an object 'data' with user details. Then it creates
+   a new user using the 'create' method of the 'users' collection and requests verification with the provided email.
+   Upon successful creation, the function automatically authenticates the user by invoking the 'login' function.
+   All the above steps are encapsulated within a try-catch block to catch and assign any errors that might arise during execution to 'err'.
+
+3. 'signOut': This function clears the authentication store to log out the user.
+
+4. 'cancel': This function redirects users back to the login page: '/auth/login' when invoked.
+
+Following the script, there is Svelte conditional rendering to check if a user is currently logged in. Depending upon the
+loggedIn status, it renders different HTML to the DOM.
+-->
 <script lang="ts">
 import { currentUser, pb } from "$lib/pocketbase";
 import {goto} from "$app/navigation";
 
+// variable setup
 let name: string;
 let username: string;
 let email: string;
@@ -9,11 +36,13 @@ let password: string;
 let passwordConfirm: string;
 let err:any = null;
 
+// login function
 async function login() {
     await pb.collection('users').authWithPassword(username, password);
     await goto('/servers');
 }
 
+// signup function
 async function signUp() {
     try {
         const data = {
@@ -31,10 +60,12 @@ async function signUp() {
     }
 }
 
+// signout function
 function signOut() {
     pb.authStore.clear();
 }
 
+// cancel function - redirects user to login screen.
 function cancel() {
     goto('/auth/login');
 }

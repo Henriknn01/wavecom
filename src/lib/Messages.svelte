@@ -1,3 +1,24 @@
+<!--
+This Svelte component is used for chat functionality within an application.
+
+The main object in the script above is `channel` of string type, which represents the specific channel for messages.
+
+Initialization:
+- Variables `messages`, `newMessage`, `newImage`, `unsubscribe`, `inputField`, `imageField` are declared to store relevant data and hooks.
+- `onMount` lifecycle hook of Svelte which runs when the page is opened, this is used to fetch messages from a specific channel and subscribe to
+messages for realtime load in this component.
+- `unsubscribe` variable created in the `onMount` hook is used to unsubscribe from messages when the page is closed via `onDestroy` Svelte lifecycle method.
+
+Functions:
+- sendMessage: an asynchronous function that creates a form and sends a new message to the backend via the `pb.collection('messages').create`
+method.
+- deleteMessage: an asynchronous function that deletes a message via the `pb.collection('messages').delete` method.
+
+Rendering:
+- The layout is only rendered if the user is authenticated (`$currentUser` exists).
+- For each message in the `messages` array, it renders a message div with sender identification and if it has an image, it's displayed.
+- The last part of the layout holds the input form for sending new messages.
+-->
 <script lang="ts">
 // Import
 import { onMount, onDestroy } from "svelte";

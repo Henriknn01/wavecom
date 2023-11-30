@@ -1,3 +1,22 @@
+<!--
+This Svelte script import uses two functionalities from the imported modules.
+The `currentUser` and `pb` modules are imported from pocketbase located in the lib directory.
+The `goto` is imported from navigation feature of Svelte-app.
+
+We define three variables here: username, password, and err.
+Username and password are of type string and used to authenticate the current user with the PocketBase collection.
+The error (`err`) variable is used to hold any error data that arises during the authentication process.
+
+We have three main functions in this component:
+
+1. `login()` - This asynchronous function authenticates the user with the PocketBase collection using the provided username and password.
+   After successful authentication, the user is redirected to the /servers page.
+   If an error is thrown during this process, it is caught and stored in the `err` variable.
+
+2. `signOut()` - This function clears the authentication store, effectively signing out the current user.
+
+3. `goSignUp()` - This function redirects the current user to the /auth/signup page if they want to create a new account.
+-->
 <script lang="ts">
 import { currentUser, pb } from "$lib/pocketbase";
 import {goto} from "$app/navigation";
