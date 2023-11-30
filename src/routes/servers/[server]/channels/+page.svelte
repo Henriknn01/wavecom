@@ -15,7 +15,7 @@ onMount(async () => {
 </script>
 
 <div class="flex space-x-4 space-y-2 border-b border-gray-300 pb-2">
-    <a href="/" class="my-auto">
+    <a href="/servers" class="my-auto">
         <ArrowLongLeft></ArrowLongLeft>
     </a>
     <h1 class="text-2xl font-bold flex-1">{server.name}</h1>

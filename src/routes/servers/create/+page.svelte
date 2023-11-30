@@ -18,7 +18,7 @@
 </script>
 
 <div class="text-center border-b border-gray-300 pb-2 flex">
-    <a href="/">
+    <a href="/servers">
         <ArrowLongLeft></ArrowLongLeft>
     </a>
     <div class="text-center flex-1 pr-4">

@@ -11,7 +11,7 @@ let err:any = null;
 
 async function login() {
     await pb.collection('users').authWithPassword(username, password);
-    await goto('/');
+    await goto('/servers');
 }
 
 async function signUp() {

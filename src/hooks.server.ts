@@ -18,8 +18,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.pb = pb
     event.locals.user = pb.authStore.model
     
-    
-    if (!event.url.pathname.startsWith("/auth")) {
+    if (event.url.pathname.startsWith("/servers")) {
         if (!pb.authStore.isValid) {
             throw redirect(301, "/auth/login")
         }

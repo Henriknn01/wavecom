@@ -12,7 +12,7 @@ let err:any = null;
 async function login() {
     try {
         await pb.collection('users').authWithPassword(username, password);
-        await goto('/');
+        await goto('/servers');
     } catch (e) {
         err = e.data;
     }
