@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Plus, ArrowLongLeft } from 'svelte-heros-v2';
+import { Plus, ArrowLongLeft, Users } from 'svelte-heros-v2';
 import Channels from "$lib/Channels.svelte";
 import { onMount } from "svelte";
 import { currentUser, pb } from "$lib/pocketbase";
@@ -22,8 +22,8 @@ onMount(async () => {
     <a href="channels/create" class="my-auto">
         <Plus></Plus>
     </a>
-    <a href="/profile" class="my-auto">
-        <img class="avatar border border-pink-600 rounded-full" src={`https://api.dicebear.com/7.x/notionists-neutral/svg?seed=${$currentUser?.username}`} alt="avatar" width="30px"/>
+    <a href="members/" class="my-auto">
+        <Users></Users>
     </a>
 </div>
 
